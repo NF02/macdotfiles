@@ -1,0 +1,68 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/" . "nico/")
+ ("/Users/nico/Documents/GitHub/Appunti-universita/" . "Fisica/")
+ ("/Users/nico/Documents/GitHub/" . "Appunti-universita/")
+ ("/Users/nico/Documents/" . "GitHub/")
+ ("/Users/nico/" . "Documents/")
+ ("/home/nico/Immagini/wallpapers/" . "Future/")
+ ("/home/nico/Immagini/" . "wallpapers/")
+ ("/home/nico/" . "Immagini/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/nico/Documents/GitHub/Appunti-universita/Fisica/"
+ "/Users/nico/"
+ "/Users/nico/Documents/"
+ "/Users/nico/Documents/GitHub/Appunti-universita/algebra e geometria/"
+ "/Users/nico/Documents/GitHub/Appunti-universita/Chimica/"
+ "/home/nico/"
+ "/home/nico/Immagini/wallpapers/Future/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "fisica.tex"
+ ".emacs"
+ "prova.org"
+ "algebraegeometria.tex"
+ "chimica.tex"
+ "02_dustwind_camaraderie.jpg"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/nico/Documents/GitHub/Appunti-universita/Fisica/" (25205 14652 0 0) "fisica.lof" "fisica.lot" "pag/" "fisica.log" "fisica.aux" "fisica.blg" "img/" "fisica.out" "fisica.tex" "fisica.toc" "fisica.pdf" ".DS_Store" "fisica.bbl" "../" "./")
+
+ ("/Users/nico/Documents/GitHub/Appunti-universita/" (25205 15971 0 0) "reti di telecomunicazione/" "algebra e geometria/" "Chimica/" "Analisi Matematica/" ".git/" ".gitattributes" "Informatica/" "README.md" "Calcolatori elettronici/" "Fisica/" "LICENSE" ".DS_Store" "../" "./")
+
+ ("/Users/nico/Documents/GitHub/" (25205 15971 0 0) "macro-multilingual-for-VIM/" "programmi/" "Appunti-universita/" "pdf_comprimer/" "macdotfiles/" "dotfiles/" ".DS_Store" "LaTeX-model/" "../" "./")
+
+ ("/Users/nico/Documents/" (25205 15971 0 0) "Mars45.jar" "prova.odt" "primo soccorso.pages" "Random/" "Halliday, Resnick, Krane - Fisica 1.pdf" "AcW3.docx" "calcolo delle ripetizioni.xlsx" "GitHub/" "legge di rolle esempio 1.pdf" "Piccolo saggio sui lavori legati all'informatica/" "Manuali/" "init system/" "cop.jpg" "#prova.org#" "progetti/" ".localized" "cartella senza nome/" ".DS_Store" "cancri di inforge/" "backup inforge.rtf" "Modulo Richiesta Prendiappunti AiutoStudio Mod-P07-02-08.xlsm" "Anatomia.pages" "Halliday, Resnick, Krane - Fisica 1 copia.pdf" "16E2A141-8E13-496F-82D3-422E16A9E93A.jpg" "../" "./")
+
+ ("/Users/nico/" (25204 65231 305261 655000) "GolandProjects/" ".zcompdump-MacBook Pro di Nicola-5.8" ".zsh_sessions/" ".viminfo" ".bash_history" ".gitconfig" ".cache/" "Downloads/" ".oh-my-zsh/" "Drive/" "fonts/" ".swiftpm/" "Cisco Packet Tracer 8.1.1/" ".vscode/" "Sync/" "Documents/" ".Trash/" ".emacs~" ".emacs" "Movies/" ".ssh/" "CLionProjects/" "getting-started/" ".ideavimrc" "Public/" ".cups/" ".octave_hist" ".emacs.d/" ".oracle_jre_usage/" ".lesshst" "eclipse-workspace/" "Library/" "Desktop/" ".p2/" ".zsh_history" ".zprofile.macports-saved_2022-04-09_at_18:24:35" ".zprofile" "Pictures/" ".local/" ".packettracer" ".zshrc" ".CFUserTextEncoding" "eclipse/" ".DS_Store" ".vim/" ".docker/" "Biblioteca di calibre/" "Music/" ".macports/" ".config/" ".eclipse/" ".zshrc.bck" "../" "./")
+
+ ("/Users/nico/.emacs.d/" (25204 57255 781617 975000) "elpa/" "auto-save-list/" "custom.el" "ido.last~" "custom.el~" "ido.last" "../" "./")
+
+ ("/Users/nico/Documents/GitHub/Appunti-universita/Analisi Matematica/" (25204 54739 0 0) "pag/" "mat.aux" "mat.log" "mat.synctex.gz" "mat.lot" "mat.lof" "Esercizi/" "img/" "mat.ilg" "mat.pdf" "formulario rapido/" "mat.out" ".DS_Store" "mat.idx" "mat.toc" "mat.tex" "mat.ind" "../" "./")
+
+ ("/Users/nico/Documents/GitHub/Appunti-universita/Chimica/" (25190 53253 0 0) "pag/" "chimica.pdf" "chimica.ilg" "chimica.ind" "chimica.tex" "chimica.idx" "chimica.toc" "chimica.out" ".DS_Store" "chimica.lof" "chimica.lot" "chimica.log" "chimica.aux" "../" "./")
+
+ ("/Users/" (25150 48873 0 0) "nico/" "Shared/" ".localized" "../" "./")
+
+ ("/Users/nico/Documents/GitHub/Appunti-universita/algebra e geometria/" (25199 64753 0 0) "pag/" "algebra e geometria.log" "algebra e geometria.aux" "algebra e geometria.lof" "algebraegeometria.lot" "algebraegeometria.lof" "algebraegeometria.log" "algebraegeometria.aux" "algebraegeometria.pdf" "algebra e geometria.toc" "algebraegeometria.ilg" "algebra e geometria.out" ".DS_Store" "algebraegeometria.out" "algebra e geometria.synctex.gz" "algebraegeometria.tex" "algebraegeometria.ind" "algebraegeometria.idx" "algebraegeometria.toc" "../" "./")
+
+ ("/home/nico/" (25174 1070 561305 95000) ".emacs" ".emacs~" ".xscreensaver" ".xprofile" ".xprofile~" ".lyrics/" "#.xprofile#" ".viminfo" ".emacs.d/" ".Xauthority" ".vim/" ".bash_history" ".zshrc" ".gnupg/" ".rnd" ".elinks/" ".fehbg" ".gitconfig" ".npm/" ".yarn/" ".yarnrc" "Video/" "Immagini/" "Musica/" "Documenti/" "Pubblici/" "Modelli/" "Scaricati/" "Scrivania/" "Downloads/" "Sync/" ".pki/" ".xinitrc" "dotfiles/" ".mozilla/" ".cache/" ".local/" ".config/" ".bashrc" ".bash_profile" ".bash_logout" "../" "./")
+
+ ("/home/nico/Immagini/wallpapers/Future/" (25171 64489 733097 477000) "future_18.jpg" "1366233000541.jpg" "1409724139691.jpg" "ridges..jpg" "73931.jpg" "4ce9b63f7219d1616f4d1ff6a(...).gif" "future_13.jpg" "1456526965024.jpg" "future_32.jpg" "BLADE RUNNER x Saigon.png" "1261635391371.jpg" "1433468675807-0.jpg" "asian_cyberpunk-wide.jpg" "futuristic_city_5_full_by(...).jpg" "1366232886688.jpg" "1431066196663-1.jpg" "future_11.jpg" "1456519479439.jpg" "1474757467074.jpg" "1408883107088.jpg" "1365871447_03.jpg" "future_14.jpg" "02_dustwind_camaraderie.jpg" "1432599578099.png" "future_3.jpg" "1443834210062-2.jpg" "future_30.jpg" "future_1.png" "ricean-vlad-city.jpg" "room on fire.jpg" "future_34.jpg" "future_20.jpg" "future_26.jpg" "1479926321076.png" "future_12.jpg" "future_27.jpg" "1378870852724.jpg" "1456524521131.jpg" "1387697504188.jpg" "future_33.jpg" "1482892301416.jpg" "future_29.jpg" "1432945333574-2.jpg" "1424128559367-2.jpg" "1484801642862.jpg" "1440291539953-1.jpg" "1443834210061-0.png" "future_22.jpg" "1440288157337-1.jpg" "1474513622989.jpg" "1430600418538.jpg" "1433294860669-4.jpg" "future_28.jpg" "513ce197db005585eb7378839(...).jpg" "1408906277712.jpg" "cyber_aa7.jpg" "future_9.jpg" "future_23.jpg" "future_31.jpg" "future_25.jpg" "1440059773384.jpg" "future_7.jpg" "1430601766509-4.jpg" "1467788059932.jpg" "future_24.jpg" "future_19.jpg" "post apocalyptic wanderer.jpg" "future_17.jpg" "future_8.jpg" "future_4.jpg" "future_2.jpg" "1469925475360.jpg" "future_15.jpg" "future_6.jpg" "1412296358907.jpg" "1430601766508-2.jpg" "1430790602233.jpg" "1474629081092.jpg" "1492610895179.jpg" "1489536506664.jpg" "1487404645380.jpg" "1443596362217-3.jpg" "1433294607923-1.jpg" "1433294860669-3.jpg" "1462804204331.jpg" "future_5.jpg" "1479665698114.jpg" "future_16.jpg" "deus_ex.png" "1476191263053.jpg" "1433294607949-2.jpg" "a bar under the sea.jpg" "1430976796805.jpg" "moon SF.jpg" "1401938669273.jpg" "1474236866683.png" "1436546392749-2.png" "1347845115045.jpg" "1443596362216-2.jpg" "1457789206886.jpg" "future_21.jpg" "hexa_city.jpg" "1413407306773-0.jpg" "1282177669146.jpg" "future_10.jpg" "1408767491406.jpg" "1475616328034.jpg" "1477516316928.jpg" "plus.jpg" "1373994632491.jpg" "../" "./")
+
+ ("/home/nico/Immagini/wallpapers/" (25171 64484 851097 160000) "Future/" "Cityscapes/" "Landscapes/" "Unsorted/" "Parrot Security OS/" "Vibrant/" "macos/" "Etc/" "Titans/" "Spacescapes/" "Tech/" "Art/" "README.md" "../" "./")
+
+ ("/home/nico/Immagini/" (25171 64526 800099 887000) "wallpapers/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
