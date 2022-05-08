@@ -1,0 +1,6 @@
+#!/bin/sh
+
+alias em="emacs -nw"
+alias breinst="brew install"
+alias vi="nvim"
+alias ls="ls --color"
