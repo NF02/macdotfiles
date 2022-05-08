@@ -9,6 +9,6 @@ To be sure that everything works I decided to publish the list of software I use
 - *docker* - container manager
 - *vscide* - I use it for its docker integration and also because sometimes I have to use standard bases
 - *resize master* - an application I use to scale images before uploading them online
-- Clipy - to manage the system clipboard, this thing allows me to replicate the layouts I use under Linux with clipman
+- *Clipy* - to manage the system clipboard, this thing allows me to replicate the layouts I use under Linux with clipman
 
 ## 
