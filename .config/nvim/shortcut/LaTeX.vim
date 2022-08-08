@@ -22,6 +22,7 @@
 	autocmd FileType tex,plaintex inoremap ,li <Enter>\item<Space>
 	autocmd FileType tex,plaintex inoremap ,ref \ref{}<Space><++><Esc>T{i
 	autocmd FileType tex,plaintex inoremap ,tab \begin{tabular}<Enter><++><Enter>\end{tabular}<Enter><Enter><++><Esc>4kA{}<Esc>i
+	autocmd FileType tex,plaintex inoremap ,tab* \begin{tabular*}<Enter><++><Enter>\end{tabular*}<Enter><Enter><++><Esc>4kA{}<Esc>i
 	autocmd FileType tex,plaintex inoremap ,ot \begin{tableau}<Enter>\inp{<++>}<Tab>\const{<++>}<Tab><++><Enter><++><Enter>\end{tableau}<Enter><Enter><++><Esc>5kA{}<Esc>i
 	autocmd FileType tex,plaintex inoremap ,can \cand{}<Tab><++><Esc>T{i
 	autocmd FileType tex,plaintex inoremap ,con \const{}<Tab><++><Esc>T{i
@@ -43,6 +44,53 @@
 	autocmd FileType tex,plaintex inoremap ,rn (\ref{})<++><Esc>F}i
 	autocmd FileType tex,plaintex inoremap ,cr \begin{center}<Enter><++><Enter>\end{center}<Enter><Enter><++><Esc>4kAi<tab>
 	autocmd FileType tex,plaintex inoremap ,mul \begin{multicols}{<++>}<Enter><Enter>\end{multicols}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,proof \begin{proof}<Enter><Enter>\end{proof}<Enter><Enter><++>3ki<tab>
+	
+
+	"math struct
+	autocmd FileType tex,plaintex inoremap ,eq \begin{equation}<Enter><Enter>\end{equation}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,eq* \begin{equation*}<Enter><Enter>\end{equation*}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,eqn \begin{eqnarray}<Enter><Enter>\end{eqnarray}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,eqn* \begin{eqnarray*}<Enter><Enter>\end{eqnarray*}<Enter><Enter><++><Esc>3ki<tab>
+	
+	autocmd FileType tex,plaintex inoremap ,eqn* \begin{eqnarray*}<Enter><Enter>\end{eqnarray*}<Enter><Enter><++><Esc>3ki<tab>
+	"math struct
+	autocmd FileType tex,plaintex inoremap ,al \begin{align}<Enter><Enter>\end{align}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,al* \begin{align*}<Enter><Enter>\end{align*}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,bsymb \boldsymbol{<++>}
+	autocmd FileType tex,plaintex inoremap ,( \left(
+	autocmd FileType tex,plaintex inoremap ,) \right)
+	autocmd FileType tex,plaintex inoremap ,[ \left[
+	autocmd FileType tex,plaintex inoremap ,] \right]
+	autocmd FileType tex,plaintex inoremap ,{ \left{
+	autocmd FileType tex,plaintex inoremap ,} \right}
+	autocmd FileType tex,plaintex inoremap ,ovrt \overrightarrow{<++>}
+	autocmd FileType tex,plaintex inoremap ,ovlt \overleftarrow{<++>}
+	autocmd FileType tex,plaintex inoremap ,ovl \overline{<++>}
+	
+
+	"" matrix
+	autocmd FileType tex,plaintex inoremap ,mtx \begin{matrix}<Enter><Enter>\end{matrix}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,mtx* \begin{matrix*}<Enter><Enter>\end{matrix*}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,pmtx \begin{pmatrix}<Enter><Enter>\end{pmatrix}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,pmtx* \begin{pmatrix*}<Enter><Enter>\end{pmatrix*}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,vmtx \begin{vmatrix}<Enter><Enter>\end{vmatrix}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,vmtx* \begin{vmatrix*}<Enter><Enter>\end{vmatrix*}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,Vmtx \begin{Vmatrix}<Enter><Enter>\end{Vmatrix}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,bmtx \begin{bmatrix}<Enter><Enter>\end{bmatrix}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,bmtx* \begin{bmatrix*}<Enter><Enter>\end{bmatrix*}<Enter><Enter><++><Esc>3ki<tab>
+	autocmd FileType tex,plaintex inoremap ,Bmtx \begin{Bmatrix}<Enter><Enter>\end{Bmatrix}<Enter><Enter><++><Esc>3ki<tab>
+	
+	"" cases
+	autocmd FileType tex,plaintex inoremap ,cases \begin{cases}<Enter><Enter>\end{cases}<Enter><Enter><++><Esc>3ki<tab>
+	
+	"" sum
+	autocmd FileType tex,plaintex inoremap ,sum \displaystyle\sum_{<++>}^{<++>}
+	
+	"" int.
+	autocmd FileType tex,plaintex inoremap ,int \int_{<++>}^{<++>}
+	autocmd FileType tex,plaintex inoremap ,intlt \int\limits_{<++>}^{<++>}
+	
 
 """.bib
 	autocmd FileType bib inoremap ,a @article{<Enter><tab>author<Space>=<Space>"<++>",<Enter><tab>year<Space>=<Space>"<++>",<Enter><tab>title<Space>=<Space>"<++>",<Enter><tab>journal<Space>=<Space>"<++>",<Enter><tab>volume<Space>=<Space>"<++>",<Enter><tab>pages<Space>=<Space>"<++>",<Enter><tab>}<Enter><++><Esc>8kA,<Esc>i

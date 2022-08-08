@@ -15,5 +15,5 @@
 	autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
 	" compilazione
 	autocmd FileType  markdown,rmd map \c <Esc>:w<Enter>:!compiler<space><c-r>%<Enter>a
-	autocmd FileType markdown,rmd map \v :!zathura $(echo % \| sed 's/md$/pdf/') & disown<CR><CR>
+	autocmd FileType markdown,rmd map \v :!open $(echo % \| sed 's/md$/pdf/') & disown<CR><CR>
 
