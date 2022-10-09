@@ -10,10 +10,10 @@
 (global-set-key (kbd "TAB") 'self-insert-command)
 
 ;; evidenzia riga
-(global-hl-line-mode 1)
+;;(global-hl-line-mode 1)
 
 ;; numero per riga
-(setq ido-create-new-buffer 'alway)
+(global-linum-mode t)
 
 ;; il repo esterno
 (require 'package)
@@ -66,27 +66,6 @@
 ;; org mode
 (use-package ox-reveal)
 (use-package org-contrib)
-
-;; popwin multitab manager
-(require 'popwin)
-(popwin-mode 1)
-
-;; | Key    | Command                               |
-;; |--------+---------------------------------------|
-;; | b      | popwin:popup-buffer                   |
-;; | l      | popwin:popup-last-buffer              |
-;; | o      | popwin:display-buffer                 |
-;; | C-b    | popwin:switch-to-last-buffer          |
-;; | C-p    | popwin:original-pop-to-last-buffer    |
-;; | C-o    | popwin:original-display-last-buffer   |
-;; | SPC    | popwin:select-popup-window            |
-;; | s      | popwin:stick-popup-window             |
-;; | 0      | popwin:close-popup-window             |
-;; | f, C-f | popwin:find-file                      |
-;; | e      | popwin:messages                       |
-;; | C-u    | popwin:universal-display              |
-;; | 1      | popwin:one-window                     |
-(global-set-key (kbd "C-z") popwin:keymap)
 
 ;; pdf view
 (setq TeX-PDF-mode t)
@@ -153,6 +132,27 @@
 (use-package go-mode)
 (use-package markdown-mode)
 
+;; popwin multitab manager
+(require 'popwin)
+(popwin-mode 1)
+
+;; | Key    | Command                               |
+;; |--------+---------------------------------------|
+;; | b      | popwin:popup-buffer                   |
+;; | l      | popwin:popup-last-buffer              |
+;; | o      | popwin:display-buffer                 |
+;; | C-b    | popwin:switch-to-last-buffer          |
+;; | C-p    | popwin:original-pop-to-last-buffer    |
+;; | C-o    | popwin:original-display-last-buffer   |
+;; | SPC    | popwin:select-popup-window            |
+;; | s      | popwin:stick-popup-window             |
+;; | 0      | popwin:close-popup-window             |
+;; | f, C-f | popwin:find-file                      |
+;; | e      | popwin:messages                       |
+;; | C-u    | popwin:universal-display              |
+;; | 1      | popwin:one-window                     |
+(global-set-key (kbd "C-z") popwin:keymap)
+
 ;; direx direct's tree
 (require 'direx)
 (push '(direx:direx-mode :position left :width 25 :dedicated t)
@@ -169,4 +169,5 @@
 
 
 ;; define macros
-(global-set-key (kbd "C-c s") (kbd "C-x 2 M-x shell"))
+(global-set-key (kbd "C-c s") (kbd "C-x 2 M-X shell"))
+(global-set-key (kbd "C-c g") (kbd "M-x linum-mode"))
