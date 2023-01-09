@@ -2,6 +2,7 @@
 ;; ░█▀▀░█░█░█▀█░█░░░▀▀█░░░█░░░█░█░█░█░█▀▀░░█░░█░█░░░█▀▀░█░█░█▀▄░░░█░█░█▀█░█░░
 ;; ░▀▀▀░▀░▀░▀░▀░▀▀▀░▀▀▀░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░░░▀░░░▀▀▀░▀░▀░░░▀░▀░▀░▀░▀▀▀
 
+; basic setting 
 ;; Rimozione degli elementi grafici
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -10,11 +11,24 @@
 (global-set-key (kbd "TAB") 'self-insert-command)
 
 ;; evidenzia riga
-;;(global-hl-line-mode 1)
+(global-hl-line-mode 1)
 
 ;; numero per riga
 (global-linum-mode t)
 
+;; mac keymap
+(set-keyboard-coding-system 'mac-roman)
+(setq mac-option-key-is-meta nil
+      mac-command-key-is-meta t
+      mac-command-modifier 'meta
+      mac-option-modifier 'none)
+
+;; dark theme
+;;(load-theme 'tsdh-dark t)
+;; light theme
+;;(load-theme 'leuven t)
+
+; Plugin
 ;; il repo esterno
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -66,30 +80,45 @@
 ;; org mode
 (use-package ox-reveal)
 (use-package org-contrib)
-
-;; pdf view
-(setq TeX-PDF-mode t)
-(use-package pdf-tools
-   :pin manual
-   :config
-   (pdf-tools-install)
-   (setq-default pdf-view-display-size 'fit-width)
-   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-   :custom
-   (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
-
-(setq TeX-view-program-selection '((output-pdf "PDF Tools"))
-      TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
-      TeX-source-correlate-start-server t)
-
-(add-hook 'TeX-after-compilation-finished-functions
-          #'TeX-revert-document-buffer)
-
-(add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
+(use-package org-modern)
+(add-hook 'org-mode-hook #'org-modern-mode)
+(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
 
 ;; powerline
 (require 'powerline)
 (powerline-default-theme)
+
+;; auto-dark
+(require 'auto-dark)
+
+;; multiple cursors
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;; Octave Mode 
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+(add-hook 'octave-mode-hook
+          (lambda ()
+            (abbrev-mode 1)
+            (auto-fill-mode 1)
+            (if (eq window-system 'x)
+                (font-lock-mode 1))))
+
+(add-hook 'inferior-octave-mode-hook
+          (lambda ()
+            (turn-on-font-lock)
+            (define-key inferior-octave-mode-map [up]
+              'comint-previous-input)
+            (define-key inferior-octave-mode-map [down]
+(autoload 'octave-help "octave-hlp" nil t)
+(require 'gnuserv)
+(gnuserv-start)
+             'comint-next-input)))
 
 ;; trasparenza
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
@@ -124,13 +153,11 @@
 
 (setq org-latex-listings 't)
 
-(load-theme 'wheatgrass t)
-
 (setq ispell-dictionary "italiano")
 (setq flyspell-use-meta-tab nil)
 
 (use-package go-mode)
-(use-package markdown-mode)
+;(use-package markdown-mode)
 
 ;; popwin multitab manager
 (require 'popwin)
@@ -159,15 +186,37 @@
      popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
 
+;; pdf view
+(setq TeX-PDF-mode t)
+(use-package pdf-tools
+   :pin manual
+   :config
+   (setenv "PKG_CONFIG_PATH" "/opt/homebrew/opt/poppler/lib/pkgconfig/")
+   (pdf-tools-install)
+   (custom-set-variables
+    '(pdf-tools-handle-upgrades t))
+   (setq-default pdf-view-display-size 'fit-width)
+   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+   :custom
+   (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
 
-;; mac keymap
-(set-keyboard-coding-system 'mac-roman)
-(setq mac-option-key-is-meta nil
-      mac-command-key-is-meta t
-      mac-command-modifier 'meta
-      mac-option-modifier 'none)
+(setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+      TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
+      TeX-source-correlate-start-server t)
+
+(add-hook 'TeX-after-compilation-finished-functions
+          #'TeX-revert-document-buffer)
+
+(add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
+
 
 
 ;; define macros
 (global-set-key (kbd "C-c s") (kbd "C-x 2 M-X shell"))
 (global-set-key (kbd "C-c g") (kbd "M-x linum-mode"))
+(global-set-key (kbd "M-c") 'kill-ring-save) ; ⌘-c = Copy
+(global-set-key (kbd "M-x") 'kill-region) ; ⌘-x = Cut
+(global-set-key (kbd "M-v") 'yank) ; ⌘-v = Paste
+(global-set-key (kbd "M-a") 'mark-whole-buffer) ; ⌘-a = Select all
+(global-set-key (kbd "M-z") 'undo) ; ⌘-z = Undo
+(global-set-key (kbd "≈") 'execute-extended-command) ; Replace ≈ with whatever your option-x produces
