@@ -1,37 +1,35 @@
-;; ░█▀▀░█▄█░█▀█░█▀▀░█▀▀░░░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░░░█▀▀░█▀█░█▀▄░░░█▄█░█▀█░█▀▀
-;; ░█▀▀░█░█░█▀█░█░░░▀▀█░░░█░░░█░█░█░█░█▀▀░░█░░█░█░░░█▀▀░█░█░█▀▄░░░█░█░█▀█░█░░
-;; ░▀▀▀░▀░▀░▀░▀░▀▀▀░▀▀▀░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░░░▀░░░▀▀▀░▀░▀░░░▀░▀░▀░▀░▀▀▀
+;; mac config
 
-; basic setting 
-;; Rimozione degli elementi grafici
+;; Disable tool bar
 (tool-bar-mode -1)
+
+;; disable scrollbar
 (scroll-bar-mode -1)
+
+;; line numbers
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+;; start page
 (setq inhibit-startup-screen t)
 
-(global-set-key (kbd "TAB") 'self-insert-command)
-
-;; evidenzia riga
-(global-hl-line-mode 1)
-
-;; numero per riga
-(global-linum-mode t)
-
-;; mac keymap
+;; Mac keyboard layout
 (set-keyboard-coding-system 'mac-roman)
-(setq mac-option-key-is-meta nil
-      mac-command-key-is-meta t
-      mac-command-modifier 'meta
-      mac-option-modifier 'none)
+;;; set right option
+(setq mac-right-option-modifier nil)
+;;; Mac Os X macros
+(global-set-key (kbd "M-c") 'kill-ring-save) ; ⌘-c = Copy
+(global-set-key (kbd "M-x") 'kill-region) ; ⌘-x = Cut
+(global-set-key (kbd "M-v") 'yank) ; ⌘-v = Paste
+(global-set-key (kbd "M-a") 'mark-whole-buffer) ; ⌘-a = Select all
+(global-set-key (kbd "M-z") 'undo) ; ⌘-z = Undo
 
-;; dark theme
-;;(load-theme 'tsdh-dark t)
-;; light theme
-;;(load-theme 'leuven t)
-
-; Plugin
-;; il repo esterno
+;; Repos
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")
+			  ("org" . "https://orgmode.org/elpa/")
+))
+
 (package-initialize)
 
 (setq custom-file "~/.emacs.d/custom.el")
@@ -39,66 +37,127 @@
   (package-install 'use-package))
 (require 'use-package)
 
-;; evil
-(use-package evil
-  :ensure t
-  :init
-  (evil-mode 1))
+;; determine the load path dirs
+;; as relative to the location of tris file
+(defvar dotfiles-dir "~/.emacs.d/"
+  "The root Emacs Lisp source folder")
 
-;; which-key
-(use-package which-key
-  :ensure t
-  :init
-  (which-key-mode 1))
+;; ido mode
+(ido-mode t)
 
-;; beacon
-(use-package beacon
-  :ensure t
-  :init
-  (beacon-mode 1))
+;; auto-dark
+(setq auto-dark-allow-osascript t)
+(require 'auto-dark)
+(auto-dark-mode)
 
-;; ido mode "modalità interattiva"
-(require 'ido)
-(setq ido-everywhere t)
-(setq ido-create-new-buffer 'alway)
-(ido-mode 1)
-;; show choices vertically
-(setf (nth 2 ido-decorations) "\n")
-;; show any name that has the chars you typed
-(setq ido-enable-flex-matching t)
-;; use current pane for newly opened file
-(setq ido-default-file-method 'selected-window)
-;; use current pane for newly switched buffer
-(setq ido-default-buffer-method 'selected-window)
-(fido-vertical-mode 1)
+;; lang check tool
+(if (file-exists-p "/opt/homebrew/bin/hunspell")
+    (progn
+      (setq ispell-program-name "hunspell")
+      (eval-after-load "ispell"
+        '(progn (defun ispell-get-coding-system () 'utf-8)))))
 
-;; auctex
+(global-set-key [f6] 'flyspell-mode)
+
+;; which key
+(require 'which-key)
+(which-key-mode)
+(which-key-setup-minibuffer)
+
+;; pdf tools
+(require 'pdf-tools)
+(use-package pdf-tools
+  :pin manual
+  :config
+  (setenv "PKG_CONFIG_PATH" "/opt/homebrew/opt/poppler/lib/pkgconfig/:/opt/homebrew/opt/libpng/lib/pkgconfig")
+  ;(pdf-tools-install)
+  (custom-set-variables
+    '(pdf-tools-handle-upgrades t))
+   (setq-default pdf-view-display-size 'fit-width)
+   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+   :custom
+   (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
+
+;; AUCtex
 (use-package auctex
   :ensure t
   :defer t)
 
-;; org mode
-(use-package ox-reveal)
-(use-package org-contrib)
-(use-package org-modern)
+;;; math preview
+(use-package latex-math-preview)
+
+;; cdlatex
+(require 'cdlatex)
+(add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)   ; with AUCTeX LaTeX mode
+(add-hook 'latex-mode-hook #'turn-on-cdlatex)   ; with Emacs latex mode
+
+;;;; Use pdf-tools to open PDF files
+(setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+      TeX-source-correlate-start-server t)
+
+;;;; Update PDF buffers after successful LaTeX runs
+(add-hook 'TeX-after-compilation-finished-functions
+          #'TeX-revert-document-buffer)
+
+;; org-mode 
+(use-package org
+  :config
+  (unbind-key "S-<left>" org-mode-map)
+  (unbind-key "S-<right>" org-mode-map)
+  (unbind-key "S-<up>" org-mode-map)
+  (unbind-key "S-<down>" org-mode-map)
+  (unbind-key "C-S-<left>" org-mode-map)
+  (unbind-key "C-S-<right>" org-mode-map)
+  (unbind-key "C-S-<up>" org-mode-map)
+  (unbind-key "C-S-<down>" org-mode-map)
+  )
+
+;;;; org babel
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . nil)
+   (R . t)
+   (octave . t)
+   (python . t)
+   (C . t)
+   (rust . t)))
+
+;;;; org modern mode
+(require 'org-modern)
 (add-hook 'org-mode-hook #'org-modern-mode)
 (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
 
-;; powerline
-(require 'powerline)
-(powerline-default-theme)
+;;;; org mode present
+(require 'org-tree-slide)
 
-;; auto-dark
-(require 'auto-dark)
+(with-eval-after-load "org-tree-slide"
+  (define-key org-tree-slide-mode-map (kbd "<f9>") 'org-tree-slide-move-previous-tree)
+  (define-key org-tree-slide-mode-map (kbd "<f10>") 'org-tree-slide-move-next-tree)
+  )
+;;;; org roam
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory (file-truename "~/Documenti/org-notes"))
+  (org-roam-complete-everywhere t)
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today)
+	 ("C-c n u" . org-roam-ui-mode)
+	 :map org-mode-map
+	 ("C-M-i"          . completion-at-point))
+  :config
+  ;; If you're using a vertical completion framework, you might want a more informative completion interface
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol))
 
-;; multiple cursors
-(require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
-;; Octave Mode 
+;; Octave
 (setq auto-mode-alist
       (cons '("\\.m$" . octave-mode) auto-mode-alist))
 
@@ -107,116 +166,32 @@
             (abbrev-mode 1)
             (auto-fill-mode 1)
             (if (eq window-system 'x)
-                (font-lock-mode 1))))
-
-(add-hook 'inferior-octave-mode-hook
-          (lambda ()
-            (turn-on-font-lock)
-            (define-key inferior-octave-mode-map [up]
-              'comint-previous-input)
-            (define-key inferior-octave-mode-map [down]
-(autoload 'octave-help "octave-hlp" nil t)
-(require 'gnuserv)
-(gnuserv-start)
-             'comint-next-input)))
-
-;; trasparenza
-(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
-(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
-
-(defun toggle-transparency ()
-   (interactive)
-   (let ((alpha (frame-parameter nil 'alpha)))
-     (set-frame-parameter
-      nil 'alpha
-      (if (eql (cond ((numberp alpha) alpha)
-                     ((numberp (cdr alpha)) (cdr alpha))
-                     ;; Also handle undocumented (<active> <inactive>) form.
-                     ((numberp (cadr alpha)) (cadr alpha)))
-               100)
-          '(90 . 90) '(100 . 100)))))
-(global-set-key (kbd "C-c t") 'toggle-transparency)
-
-;; latex
-(with-eval-after-load 'ox-latex
-  (add-to-list 'org-latex-classes
-             '("org-plain-latex"
-               "\\documentclass{article}
-           [NO-DEFAULT-PACKAGES]
-           [PACKAGES]
-           [EXTRA]"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
-
-(setq org-latex-listings 't)
-
-(setq ispell-dictionary "italiano")
-(setq flyspell-use-meta-tab nil)
-
-(use-package go-mode)
-;(use-package markdown-mode)
-
-;; popwin multitab manager
-(require 'popwin)
-(popwin-mode 1)
-
-;; | Key    | Command                               |
-;; |--------+---------------------------------------|
-;; | b      | popwin:popup-buffer                   |
-;; | l      | popwin:popup-last-buffer              |
-;; | o      | popwin:display-buffer                 |
-;; | C-b    | popwin:switch-to-last-buffer          |
-;; | C-p    | popwin:original-pop-to-last-buffer    |
-;; | C-o    | popwin:original-display-last-buffer   |
-;; | SPC    | popwin:select-popup-window            |
-;; | s      | popwin:stick-popup-window             |
-;; | 0      | popwin:close-popup-window             |
-;; | f, C-f | popwin:find-file                      |
-;; | e      | popwin:messages                       |
-;; | C-u    | popwin:universal-display              |
-;; | 1      | popwin:one-window                     |
-(global-set-key (kbd "C-z") popwin:keymap)
-
-;; direx direct's tree
-(require 'direx)
-(push '(direx:direx-mode :position left :width 25 :dedicated t)
-     popwin:special-display-config)
-(global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
-
-;; pdf view
-(setq TeX-PDF-mode t)
-(use-package pdf-tools
-   :pin manual
-   :config
-   (setenv "PKG_CONFIG_PATH" "/opt/homebrew/opt/poppler/lib/pkgconfig/")
-   (pdf-tools-install)
-   (custom-set-variables
-    '(pdf-tools-handle-upgrades t))
-   (setq-default pdf-view-display-size 'fit-width)
-   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-   :custom
-   (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
-
-(setq TeX-view-program-selection '((output-pdf "PDF Tools"))
-      TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
-      TeX-source-correlate-start-server t)
-
-(add-hook 'TeX-after-compilation-finished-functions
-          #'TeX-revert-document-buffer)
-
-(add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
+                (font-lock-mode 1)))
+	  'display-line-numbers-mode)
 
 
+;; powerline
+(require 'powerline)
+(powerline-default-theme)
 
-;; define macros
-(global-set-key (kbd "C-c s") (kbd "C-x 2 M-X shell"))
-(global-set-key (kbd "C-c g") (kbd "M-x linum-mode"))
-(global-set-key (kbd "M-c") 'kill-ring-save) ; ⌘-c = Copy
-(global-set-key (kbd "M-x") 'kill-region) ; ⌘-x = Cut
-(global-set-key (kbd "M-v") 'yank) ; ⌘-v = Paste
-(global-set-key (kbd "M-a") 'mark-whole-buffer) ; ⌘-a = Select all
-(global-set-key (kbd "M-z") 'undo) ; ⌘-z = Undo
-(global-set-key (kbd "≈") 'execute-extended-command) ; Replace ≈ with whatever your option-x produces
+;; company
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+
+;; neotree
+(require 'neotree)
+(global-set-key [f5] 'neotree-toggle)
+(global-set-key (kbd "C-c r") 'neotree-refresh)
+
+;; gnu cobol
+(require 'cobol-mode)
+(setq auto-mode-alist
+      (append
+       '(("\\.cob\\'" . cobol-mode)
+         ("\\.cbl\\'" . cobol-mode)
+         ("\\.cpy\\'" . cobol-mode))
+       auto-mode-alist))
+
+;; slime
+(require 'slime)
+(setq inferior-lisp-program "sbcl")

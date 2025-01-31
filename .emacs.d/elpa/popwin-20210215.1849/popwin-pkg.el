@@ -1,2 +1,0 @@
-;;; Generated package description from popwin.el  -*- no-byte-compile: t -*-
-(define-package "popwin" "20210215.1849" "Popup Window Manager" '((emacs "24.3")) :commit "76b8b427cc1bbb5aeaa2dc20cfa0443b89efab43" :authors '(("Tomohiro Matsuyama" . "m2ym.pub@gmail.com")) :maintainer '("Tomohiro Matsuyama" . "m2ym.pub@gmail.com") :keywords '("convenience") :url "https://github.com/emacsorphanage/popwin")
