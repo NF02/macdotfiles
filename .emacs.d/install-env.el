@@ -23,7 +23,11 @@
        latex-extra
        latex-math-preview
        yatex
-       
+
+       ;; rust mode
+       rust-mode
+       tree-sitter
+       tree-sitter-langs
        ;; org mode
        org-modern
        org-contrib
