@@ -12,6 +12,7 @@
        company-ctags
        company-php
        company-web
+       company-statistics
        company-c-headers
        company-math
        
