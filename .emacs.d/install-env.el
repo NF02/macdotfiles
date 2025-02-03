@@ -51,7 +51,7 @@
        powerline
        cobol-mode
        pdf-tools
-       elfeed-org
+       elfeed
        octave
        neotree
        vterm
