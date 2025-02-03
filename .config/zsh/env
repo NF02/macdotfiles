@@ -1,0 +1,5 @@
+#!/bin/env zsh
+
+
+export EDITOR="emacs"
+export TERMINAL="iterm2"
